@@ -1,0 +1,236 @@
+:root {
+    --clr-primary: rgb(33, 113, 145);
+    --clr-light: #f4f4f4;
+    --clr-dark: #333;
+    --clr-warning: rgb(63, 21, 21);
+}
+
+*,
+*::before,
+*::after {
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    display: grid;
+    grid:
+    "header header header header" auto
+    "...... lists active ......" auto/1fr minmax(100px, 300px) minmax(250px,500px) 1fr;
+}
+
+.title {
+    grid-area: header;
+    text-align: center;
+    font-size: calc(7vw + 2rem);
+    font-weight: 900;
+    color: rgba(138, 200, 186, 0.5);
+    letter-spacing: 1px;
+    margin: 0 0 0.5em;
+}
+
+.all-tasks {
+    grid-area: lists;
+}
+
+.task-list {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    list-style: circle;
+    padding-left: 1.1em;
+    padding-right: 1.5em;
+}
+
+.list-name {
+    cursor: pointer;
+}
+
+.list-name:hover {
+    opacity: 0.7;
+}
+
+form {
+    display: flex;
+}
+
+.btn {
+    cursor: pointer;
+    background-color:rgb(224, 240, 229);
+    border: 2px solid grey;
+    padding: 1px;
+    color: grey;
+}
+
+.btn.create {
+     font-size: 1.5rem;
+     font-weight: 700;
+     margin-right: 0.25em;
+     transition: opacity 250ms ease-in;
+}
+
+.btn.create:hover {
+  opacity: 0.7;
+}
+
+.btn.delete {
+  opacity: 0.7;
+  font-size: 1rem;
+  transition: color 200ms;
+}
+
+.btn.delete:hover {
+    color: var(--clr-warning);
+}
+
+.new {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    border-bottom: 2px solid currentColor;
+    font-size: inherit;
+    padding: 0.2em;
+    transition: border-bottom 150ms ease-in;
+}
+
+.new:focus::placeholder {
+    opacity: 0.2;  
+}
+
+
+.new.list {
+    color: whitesmoke;
+    font-size: 1.2rem;
+}
+
+.new.task {
+  margin-bottom: 0;
+}
+
+.active-list {
+    background-color: rgb(145, 193, 230); /*Highlight color*/
+}
+
+.todo-list {
+    --spacer: 0.5rem;
+    grid-area: active;
+    background-color: var(--clr-light);
+    color: var(--clr-dark);
+    position: relative;
+
+}
+
+.todo-header {
+    padding: var(--spacer);
+    background-color: rgb(145, 193, 230);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.list-title {
+    margin: 0 1em 0 0;
+}
+
+.task-count {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.todo-body {
+    padding: var(--spacer);
+    position: relative;
+}
+
+.new-task-creator .create {
+  color: var(--clr-primary);
+}
+
+[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.task label {
+    display: flex-inline;
+    align-items: center;
+    position: relative;
+    margin-bottom: 1.5em;
+}
+
+.task {
+    position:relative;
+}
+
+.task::after {
+   content: "";
+   position: absolute; 
+   right: 0;
+   left: 0;
+   bottom: -8%;
+   height: 1px;
+   background: currentColor;
+   opacity: 0.1;
+}
+
+.custom-checkbox {
+    --size: 0.75em;
+    display: inline-block;
+    width: var(--size);
+    height:var(--size);
+    margin-right: var(--size);
+    cursor: pointer;
+    border-width: 2px solid currentColor;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 300ms ease-in-out;
+}
+
+.task:hover .custom-checkbox, [type="checkbox"]:focus + label .custom-checkbox  {
+    transform: scale(1.3);
+    color: var(--clr-primary);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+    background: var(--clr-primary);
+    border-color: var(--clr-primary);
+    box-shadow: inset 0 0 0px 2px white;
+}
+
+[type="checkbox"]:checked + label {
+    opacity: 0.5;
+}
+
+.task label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    left: 1.5em;
+    top: 50%;
+    height: 3px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 150ms ease-in-out;
+}
+
+[type="checkbox"]:checked + label::after {
+    transform: scalex(1);
+    transform-origin: left;
+}
+
+.delete-stuff {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -30px;
+    color: var(--clr-light);
+}
